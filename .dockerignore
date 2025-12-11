@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb.bak
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (keep the CSVs but ignore large temp files)
+*.log
+*.tmp
+
+# Git
+.git/
+.gitignore
+
+# Documentation (keep README)
+# README.md
+
+# Spark metastore
+metastore_db/
+derby.log
+
+# Don't include these in the Docker image
+zk-single-kafka-single.yml
+TwitterSentimentAnalysisModel.ipynb

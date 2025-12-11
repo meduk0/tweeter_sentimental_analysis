@@ -1,0 +1,450 @@
+{
+  "sentiment_distribution": [
+    {
+      "sentiment": "Negative",
+      "count": 22358
+    },
+    {
+      "sentiment": "Positive",
+      "count": 20655
+    },
+    {
+      "sentiment": "Neutral",
+      "count": 18108
+    },
+    {
+      "sentiment": "Irrelevant",
+      "count": 12875
+    }
+  ],
+  "game_distribution": [
+    {
+      "game": "LeagueOfLegends",
+      "count": 2377
+    },
+    {
+      "game": "MaddenNFL",
+      "count": 2377
+    },
+    {
+      "game": "CallOfDuty",
+      "count": 2376
+    },
+    {
+      "game": "Verizon",
+      "count": 2365
+    },
+    {
+      "game": "TomClancysRainbowSix",
+      "count": 2364
+    },
+    {
+      "game": "Facebook",
+      "count": 2362
+    },
+    {
+      "game": "Microsoft",
+      "count": 2361
+    },
+    {
+      "game": "Dota2",
+      "count": 2359
+    },
+    {
+      "game": "WorldOfCraft",
+      "count": 2357
+    },
+    {
+      "game": "ApexLegends",
+      "count": 2353
+    },
+    {
+      "game": "NBA2K",
+      "count": 2343
+    },
+    {
+      "game": "CallOfDutyBlackopsColdWar",
+      "count": 2343
+    },
+    {
+      "game": "FIFA",
+      "count": 2324
+    },
+    {
+      "game": "johnson&johnson",
+      "count": 2324
+    },
+    {
+      "game": "TomClancysGhostRecon",
+      "count": 2321
+    },
+    {
+      "game": "Battlefield",
+      "count": 2316
+    },
+    {
+      "game": "Overwatch",
+      "count": 2316
+    },
+    {
+      "game": "GrandTheftAuto(GTA)",
+      "count": 2293
+    },
+    {
+      "game": "HomeDepot",
+      "count": 2292
+    },
+    {
+      "game": "PlayStation5(PS5)",
+      "count": 2291
+    },
+    {
+      "game": "Hearthstone",
+      "count": 2286
+    },
+    {
+      "game": "CS-GO",
+      "count": 2284
+    },
+    {
+      "game": "Xbox(Xseries)",
+      "count": 2283
+    },
+    {
+      "game": "Borderlands",
+      "count": 2280
+    },
+    {
+      "game": "Amazon",
+      "count": 2276
+    },
+    {
+      "game": "Google",
+      "count": 2274
+    },
+    {
+      "game": "Nvidia",
+      "count": 2271
+    },
+    {
+      "game": "Cyberpunk2077",
+      "count": 2262
+    },
+    {
+      "game": "Fortnite",
+      "count": 2249
+    },
+    {
+      "game": "RedDeadRedemption(RDR)",
+      "count": 2249
+    },
+    {
+      "game": "AssassinsCreed",
+      "count": 2234
+    },
+    {
+      "game": "PlayerUnknownsBattlegrounds(PUBG)",
+      "count": 2234
+    }
+  ],
+  "top_tokens_by_sentiment": {
+    "Negative": [
+      {
+        "token": "game",
+        "count": 2103
+      },
+      {
+        "token": "get",
+        "count": 962
+      },
+      {
+        "token": "like",
+        "count": 889
+      },
+      {
+        "token": "shit",
+        "count": 845
+      },
+      {
+        "token": "fix",
+        "count": 732
+      },
+      {
+        "token": "fuck",
+        "count": 717
+      },
+      {
+        "token": "play",
+        "count": 711
+      },
+      {
+        "token": "eamaddennfl",
+        "count": 649
+      },
+      {
+        "token": "still",
+        "count": 626
+      },
+      {
+        "token": "fucking",
+        "count": 626
+      },
+      {
+        "token": "please",
+        "count": 619
+      },
+      {
+        "token": "even",
+        "count": 578
+      },
+      {
+        "token": "really",
+        "count": 568
+      },
+      {
+        "token": "one",
+        "count": 565
+      },
+      {
+        "token": "verizon",
+        "count": 565
+      }
+    ],
+    "Positive": [
+      {
+        "token": "game",
+        "count": 1384
+      },
+      {
+        "token": "love",
+        "count": 1133
+      },
+      {
+        "token": "good",
+        "count": 995
+      },
+      {
+        "token": "like",
+        "count": 873
+      },
+      {
+        "token": "really",
+        "count": 821
+      },
+      {
+        "token": "new",
+        "count": 729
+      },
+      {
+        "token": "best",
+        "count": 694
+      },
+      {
+        "token": "one",
+        "count": 663
+      },
+      {
+        "token": "time",
+        "count": 643
+      },
+      {
+        "token": "play",
+        "count": 642
+      },
+      {
+        "token": "great",
+        "count": 614
+      },
+      {
+        "token": "playing",
+        "count": 584
+      },
+      {
+        "token": "fun",
+        "count": 566
+      },
+      {
+        "token": "get",
+        "count": 555
+      },
+      {
+        "token": "games",
+        "count": 547
+      }
+    ],
+    "Irrelevant": [
+      {
+        "token": "like",
+        "count": 987
+      },
+      {
+        "token": "see",
+        "count": 942
+      },
+      {
+        "token": "player",
+        "count": 882
+      },
+      {
+        "token": "game",
+        "count": 786
+      },
+      {
+        "token": "people",
+        "count": 761
+      },
+      {
+        "token": "ban",
+        "count": 739
+      },
+      {
+        "token": "love",
+        "count": 670
+      },
+      {
+        "token": "one",
+        "count": 655
+      },
+      {
+        "token": "good",
+        "count": 645
+      },
+      {
+        "token": "best",
+        "count": 611
+      },
+      {
+        "token": "battlefield",
+        "count": 544
+      },
+      {
+        "token": "really",
+        "count": 540
+      },
+      {
+        "token": "get",
+        "count": 482
+      },
+      {
+        "token": "go",
+        "count": 477
+      },
+      {
+        "token": "shit",
+        "count": 457
+      }
+    ],
+    "Neutral": [
+      {
+        "token": "johnson",
+        "count": 1242
+      },
+      {
+        "token": "game",
+        "count": 878
+      },
+      {
+        "token": "amazon",
+        "count": 765
+      },
+      {
+        "token": "like",
+        "count": 664
+      },
+      {
+        "token": "get",
+        "count": 632
+      },
+      {
+        "token": "new",
+        "count": 619
+      },
+      {
+        "token": "facebook",
+        "count": 595
+      },
+      {
+        "token": "one",
+        "count": 568
+      },
+      {
+        "token": "google",
+        "count": 565
+      },
+      {
+        "token": "play",
+        "count": 546
+      },
+      {
+        "token": "microsoft",
+        "count": 509
+      },
+      {
+        "token": "us",
+        "count": 488
+      },
+      {
+        "token": "good",
+        "count": 480
+      },
+      {
+        "token": "dead",
+        "count": 474
+      },
+      {
+        "token": "com",
+        "count": 458
+      }
+    ]
+  },
+  "model_metrics": {
+    "baseline_lr": {
+      "accuracy": 0.829,
+      "f1_score": 0.8287526400043554
+    },
+    "tuned_lr": {
+      "accuracy": 0.868,
+      "f1_score": 0.8681943668790444
+    },
+    "baseline_nb": {
+      "accuracy": 0.711,
+      "f1_score": 0.7093889630063799
+    },
+    "tuned_nb": {
+      "accuracy": 0.703,
+      "f1_score": 0.7023970533672858
+    }
+  },
+  "confusion_matrix": [
+    [
+      156,
+      5,
+      3,
+      8
+    ],
+    [
+      12,
+      230,
+      14,
+      10
+    ],
+    [
+      15,
+      12,
+      238,
+      20
+    ],
+    [
+      11,
+      6,
+      16,
+      244
+    ]
+  ],
+  "sentiment_labels": [
+    "Negative",
+    "Positive",
+    "Irrelevant",
+    "Neutral"
+  ]
+}

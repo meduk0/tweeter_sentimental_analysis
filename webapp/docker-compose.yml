@@ -1,0 +1,39 @@
+services:
+  twitter-sentiment-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: twitter_sentiment_web
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount models directory if you want to update models without rebuilding
+      - ../models:/app/models:ro
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+      - HADOOP_USER_NAME=root
+      - _JAVA_OPTIONS=-Xmx1g -Xms256m -Duser.country=US -Duser.language=en -Djavax.security.auth.useSubjectCredsOnly=false -XX:+IgnoreUnrecognizedVMOptions
+      - JAVA_TOOL_OPTIONS=-Xmx1g -Xms256m
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1.5G
+    restart: unless-stopped
+    networks:
+      - sentiment-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  sentiment-network:
+    driver: bridge

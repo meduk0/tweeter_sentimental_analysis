@@ -13,12 +13,12 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-# Check if models directory exists
-if [ ! -d "../models" ]; then
-    echo -e "${RED}❌ Error: '../models' directory not found!${NC}"
+# Check if saved_models directory exists
+if [ ! -d "saved_models" ]; then
+    echo -e "${RED}❌ Error: 'saved_models' directory not found!${NC}"
     echo ""
     echo "Please run the Jupyter notebook first to train and save the models:"
-    echo "  1. Open: jupyter notebook ../notebooks/TwitterSentimentAnalysis_Spark.ipynb"
+    echo "  1. Open: jupyter notebook TwitterSentimentAnalysis_Spark.ipynb"
     echo "  2. Run all cells, especially Section 12 (Save Best Model)"
     echo "  3. Then run this script again"
     echo ""
@@ -26,7 +26,7 @@ if [ ! -d "../models" ]; then
 fi
 
 # Check if dashboard_data.json exists
-if [ ! -f "../models/dashboard_data.json" ]; then
+if [ ! -f "saved_models/dashboard_data.json" ]; then
     echo -e "${YELLOW}⚠️  Warning: 'dashboard_data.json' not found!${NC}"
     echo "The dashboard tab may not work properly."
     echo "Please ensure you ran all cells in Section 12 of the notebook."

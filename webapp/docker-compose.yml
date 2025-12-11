@@ -1,19 +1,21 @@
 services:
   twitter-sentiment-app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: webapp/Dockerfile
     container_name: twitter_sentiment_web
     ports:
       - "8501:8501"
     volumes:
       # Mount models directory if you want to update models without rebuilding
-      - ../models:/app/models:ro
+      # Mount the project's models directory into the container at /models
+      - ../models:/models:ro
     environment:
-      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 # check in debian 
       - HADOOP_USER_NAME=root
       - _JAVA_OPTIONS=-Xmx1g -Xms256m -Duser.country=US -Duser.language=en -Djavax.security.auth.useSubjectCredsOnly=false -XX:+IgnoreUnrecognizedVMOptions
       - JAVA_TOOL_OPTIONS=-Xmx1g -Xms256m
+      - MODELS_DIR=/models
     ulimits:
       nofile:
         soft: 65536
@@ -37,3 +39,4 @@ services:
 networks:
   sentiment-network:
     driver: bridge
+

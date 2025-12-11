@@ -24,7 +24,6 @@ from pyspark.ml.feature import (
     HashingTF, IDFModel, NGram, VectorAssembler
 )
 from pyspark.ml.classification import LogisticRegressionModel
-from pathlib import Path
 
 # Page configuration
 st.set_page_config(
@@ -74,17 +73,16 @@ st.markdown("""
 @st.cache_resource
 def initialize_spark():
     """Initialize Spark session"""
-    # JVM options to disable problematic metrics in containerized environment
-    jvm_options = "-Duser.country=US -Duser.language=en -Djavax.security.auth.useSubjectCredsOnly=false -XX:+IgnoreUnrecognizedVMOptions"
-    
     spark = SparkSession.builder \
         .appName("TwitterSentimentWeb") \
         .master("local[2]") \
-        .config("spark.driver.memory", "1g") \
-        .config("spark.executor.memory", "1g") \
+        .config("spark.driver.memory", "2g") \
+        .config("spark.executor.memory", "2g") \
         .config("spark.sql.shuffle.partitions", "4") \
-        .config("spark.driver.extraJavaOptions", jvm_options) \
-        .config("spark.executor.extraJavaOptions", jvm_options) \
+        .config("spark.driver.extraJavaOptions",
+                "-Duser.country=US -Duser.language=en -Djavax.security.auth.useSubjectCredsOnly=false") \
+        .config("spark.executor.extraJavaOptions",
+                "-Duser.country=US -Duser.language=en -Djavax.security.auth.useSubjectCredsOnly=false") \
         .config("spark.hadoop.fs.defaultFS", "file:///") \
         .config("spark.metrics.conf.*.sink.jmx.class", "org.apache.spark.metrics.sink.JmxSink") \
         .getOrCreate()
@@ -96,56 +94,27 @@ def initialize_spark():
 @st.cache_resource
 def load_models(_spark):
     """Load all trained models and preprocessing components"""
-    # Support multiple candidate locations for models so container mounts work.
-    BASE_DIR = Path(__file__).resolve().parent.parent
-
-    candidates = []
-    env_dir = os.environ.get('MODELS_DIR') or os.environ.get('MODELS_PATH')
-    if env_dir:
-        candidates.append(Path(env_dir))
-
-    candidates += [
-        BASE_DIR / 'models',
-        Path('/models'),
-        Path.cwd() / 'models',
-        BASE_DIR.parent / 'models'
-    ]
-
-    models_dir = None
-    tried = []
-    for c in candidates:
-        if c is None:
-            continue
-        tried.append(str(c))
-        if c.exists():
-            models_dir = c
-            break
-
-    if models_dir is None:
-        st.error(
-            "Models directory not found. Tried: " + ", ".join(tried) +
-            ". If running in Docker, set the MODELS_DIR env var or mount your models to /models."
-        )
-        return None
-
+    models_dir = "saved_models"
+    
     try:
         # Load models
-        lr_model = LogisticRegressionModel.load(str(models_dir / "best_lr_model"))
-        label_indexer = StringIndexerModel.load(str(models_dir / "label_indexer"))
-        tokenizer = Tokenizer.load(str(models_dir / "tokenizer"))
-        stop_words_remover = StopWordsRemover.load(str(models_dir / "stop_words_remover"))
-        hashing_tf = HashingTF.load(str(models_dir / "hashing_tf"))
-        hashing_tf_bigram = HashingTF.load(str(models_dir / "hashing_tf_bigram"))
-        hashing_tf_trigram = HashingTF.load(str(models_dir / "hashing_tf_trigram"))
-        idf_model = IDFModel.load(str(models_dir / "idf_model"))
-        bigram = NGram.load(str(models_dir / "bigram"))
-        trigram = NGram.load(str(models_dir / "trigram"))
-        vector_assembler = VectorAssembler.load(str(models_dir / "vector_assembler"))
-
+        lr_model = LogisticRegressionModel.load(os.path.join(models_dir, "best_lr_model"))
+        label_indexer = StringIndexerModel.load(os.path.join(models_dir, "label_indexer"))
+        tokenizer = Tokenizer.load(os.path.join(models_dir, "tokenizer"))
+        stop_words_remover = StopWordsRemover.load(os.path.join(models_dir, "stop_words_remover"))
+        hashing_tf = HashingTF.load(os.path.join(models_dir, "hashing_tf"))
+        hashing_tf_bigram = HashingTF.load(os.path.join(models_dir, "hashing_tf_bigram"))
+        hashing_tf_trigram = HashingTF.load(os.path.join(models_dir, "hashing_tf_trigram"))
+        idf_model = IDFModel.load(os.path.join(models_dir, "idf_model"))
+        bigram = NGram.load(os.path.join(models_dir, "bigram"))
+        trigram = NGram.load(os.path.join(models_dir, "trigram"))
+        vector_assembler = VectorAssembler.load(os.path.join(models_dir, "vector_assembler"))
+        
         # Get label mapping from the StringIndexerModel
+        # labels attribute contains the ordered list of sentiment labels
         labels_array = label_indexer.labels
         label_to_sentiment = {int(idx): label for idx, label in enumerate(labels_array)}
-
+        
         return {
             'lr_model': lr_model,
             'label_indexer': label_indexer,
@@ -169,26 +138,7 @@ def load_models(_spark):
 def load_dashboard_data():
     """Load pre-computed dashboard data"""
     try:
-        BASE_DIR = Path(__file__).resolve().parent.parent
-        env_dir = os.environ.get('MODELS_DIR') or os.environ.get('MODELS_PATH')
-        if env_dir:
-            dashboard_path = Path(env_dir) / 'dashboard_data.json'
-        else:
-            dashboard_path = None
-            for candidate in [
-                BASE_DIR / 'models' / 'dashboard_data.json',
-                Path('/models') / 'dashboard_data.json',
-                Path.cwd() / 'models' / 'dashboard_data.json'
-            ]:
-                if candidate.exists():
-                    dashboard_path = candidate
-                    break
-
-        if dashboard_path is None or not dashboard_path.exists():
-            st.error(f"Dashboard data not found. Tried: {BASE_DIR / 'models' / 'dashboard_data.json'} and /models/dashboard_data.json")
-            return None
-
-        with open(dashboard_path, 'r') as f:
+        with open('saved_models/dashboard_data.json', 'r') as f:
             return json.load(f)
     except Exception as e:
         st.error(f"Error loading dashboard data: {str(e)}")

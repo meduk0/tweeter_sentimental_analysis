@@ -8,6 +8,15 @@
 
 A comprehensive machine learning project that analyzes Twitter sentiment using Apache Spark and PySpark MLlib. The project includes data preprocessing, model training with hyperparameter tuning, and an interactive web dashboard for sentiment prediction.
 
+## 📷 Preview
+
+Quick visual preview of the Streamlit web app 
+
+<p align="center">
+  <img src="images/dashboard.png" alt="Dashboard preview" width="600" />
+  <img src="images/predict.png" alt="Prediction preview" width="600" />
+</p>
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -218,12 +227,10 @@ python -m jupyter nbconvert --to notebook --execute notebooks/TwitterSentimentAn
 #### Option A: Docker Compose (Recommended)
 
 ```bash
-cd webapp
-bash start.sh
-# Select option 1 (Docker Compose)
-
-# Or run directly:
-docker-compose up --build
+docker-compose -f ./webapp/docker-compose.yml build
+docker-compose -f ./webapp/docker-compose.yml up -d 
+# check the logs for issues if the 2 on top runned perfectly 
+docker-compose -f ./webapp/docker-compose.yml logs
 
 # Access at: http://localhost:8501
 ```
@@ -231,12 +238,10 @@ docker-compose up --build
 #### Option B: Local Python Environment
 
 ```bash
-cd webapp
-bash start.sh
-# Select option 2 (Local Python)
-
-# Or run directly:
-streamlit run app.py
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk 
+set -x HADOOP_USER_NAME $USER 
+streamlit run webapp/app.py
+# note :u might face some issues caused by pyspark (u need to solve them based on ur distribution)
 
 # Access at: http://localhost:8501
 ```
